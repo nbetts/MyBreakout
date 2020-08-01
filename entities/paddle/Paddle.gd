@@ -1,3 +1,4 @@
+class_name Paddle
 extends KinematicBody2D
 
 export var acceleration = 70

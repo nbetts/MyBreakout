@@ -9,7 +9,8 @@ var damage = 1
 
 onready var bounceSound = $BounceSound
 
-func set_start_direction():
+func put_in_play(position: Vector2):
+	self.position = position
 	direction = Vector2(rand_range(-0.5, 0.5), -1).normalized() * speed
 
 
@@ -29,9 +30,3 @@ func _physics_process(delta):
 			direction = Vector2(x, direction.y).normalized() * speed
 		elif collision.collider.is_in_group("brick"):
 			collision.collider.take_hit(damage)
-
-
-func reset():
-	var viewport = get_viewport_rect().size
-	position = Vector2(viewport.x / 2, viewport.y / 2);
-	set_start_direction()
