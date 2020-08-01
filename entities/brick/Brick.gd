@@ -1,5 +1,6 @@
 extends StaticBody2D
 
+signal tookHit
 signal died
 
 export var health = 5
@@ -26,6 +27,7 @@ func take_hit(damage):
 	health -= damage
 	if health > 0:
 		update_color()
+		emit_signal("tookHit")
 	else:
-		emit_signal("died")
 		queue_free()
+		emit_signal("died")
