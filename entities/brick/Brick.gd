@@ -1,4 +1,4 @@
-extends Area2D
+extends StaticBody2D
 
 signal died
 
@@ -12,19 +12,18 @@ func _ready():
 
 func update_color():
 	match health:
-		8: polygon.color = '#51ee8b'
-		7: polygon.color = '#e551ee'
-		6: polygon.color = '#cfee51'
+		7: polygon.color = '#7b51ee'
+		6: polygon.color = '#e551ee'
 		5: polygon.color = '#ee5c51'
-		4: polygon.color = '#51dfee'
-		3: polygon.color = '#7b51ee'
-		2: polygon.color = '#eead51'
-		1: polygon.color = '#51ee66'
+		4: polygon.color = '#eead51'
+		3: polygon.color = '#cfee51'
+		2: polygon.color = '#51ee8b'
+		1: polygon.color = '#51dfee'
 		_: polygon.color = '#000000'
 
 
-func _on_Brick_body_entered(body):
-	health -= 1
+func take_hit(damage):
+	health -= damage
 	if health > 0:
 		update_color()
 	else:

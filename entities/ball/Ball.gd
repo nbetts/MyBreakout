@@ -5,13 +5,14 @@ export var initial_speed = 500
 
 var speed = initial_speed
 var direction = Vector2()
+var damage = 1
 
 #onready var paddleSound = $PaddleSound
 #onready var wallSound = $WalSound
 #onready var brickSound = $brickSound
 
 func set_start_direction():
-	direction = Vector2(rand_range(-0.2, 0.2), -1).normalized() * speed
+	direction = Vector2(rand_range(-0.5, 0.5), -1).normalized() * speed
 
 
 func _physics_process(delta):
@@ -27,6 +28,8 @@ func _physics_process(delta):
 			
 			direction = Vector2(x, direction.y).normalized() * speed
 		#	$SoundRacket.play()
+		elif collision.collider.is_in_group("brick"):
+			collision.collider.take_hit(damage)
 		#else:
 		#	$SoundWall.play()
 
