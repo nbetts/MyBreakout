@@ -20,7 +20,11 @@ func _physics_process(delta):
 	if collision:
 		direction = direction.bounce(collision.normal)
 		if collision.collider.is_in_group("paddle"):
-			var x = direction.x + (collision.collider_velocity.x / 4)
+			# Allow the paddle to give the ball some momentum
+			var x = direction.x + (collision.collider_velocity.x / 2)
+			# The nearer the edge of the paddle, the more sideways velocity
+			x+= (position.x - collision.collider.position.x) * 5
+			
 			direction = Vector2(x, direction.y).normalized() * speed
 		#	$SoundRacket.play()
 		#else:
