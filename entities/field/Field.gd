@@ -39,7 +39,7 @@ func place_ball():
 
 func begin_game(level):
 	player_score = 0
-	var current_level_scene = load("res://levels/Level1.tscn")
+	var current_level_scene = load("res://levels/Level%d.tscn" % level)
 	
 	if current_level != null:
 		remove_child(current_level)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/Theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/UI.gd" type="Script" id=2]
+[ext_resource path="res://ui/Levels.gd" type="Script" id=3]
 
 [node name="UI" type="CenterContainer"]
 anchor_right = 1.0
@@ -38,9 +39,9 @@ text = "Quit"
 [node name="LevelSelectMenu" type="VBoxContainer" parent="."]
 visible = false
 margin_left = 466.0
-margin_top = 340.0
+margin_top = 361.0
 margin_right = 558.0
-margin_bottom = 428.0
+margin_bottom = 407.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -48,11 +49,7 @@ __meta__ = {
 [node name="Levels" type="GridContainer" parent="LevelSelectMenu"]
 margin_right = 190.0
 margin_bottom = 42.0
-
-[node name="01" type="Button" parent="LevelSelectMenu/Levels"]
-margin_right = 51.0
-margin_bottom = 42.0
-text = "01"
+script = ExtResource( 3 )
 
 [node name="LevelSelectBack" type="Button" parent="LevelSelectMenu"]
 margin_top = 46.0
@@ -95,7 +92,7 @@ text = "Quit Level"
 [connection signal="pressed" from="MainMenu/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="MainMenu/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="MainMenu/Quit" to="." method="_on_Quit_pressed"]
-[connection signal="pressed" from="LevelSelectMenu/Levels/01" to="." method="_on_01_pressed"]
+[connection signal="level_button_pressed" from="LevelSelectMenu/Levels" to="." method="_on_Levels_level_button_pressed"]
 [connection signal="pressed" from="LevelSelectMenu/LevelSelectBack" to="." method="_on_LevelSelectBack_pressed"]
 [connection signal="pressed" from="OptionsMenu/OptionsBack" to="." method="_on_OptionsBack_pressed"]
 [connection signal="pressed" from="PauseMenu/Continue" to="." method="_on_Continue_pressed"]

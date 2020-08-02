@@ -37,8 +37,8 @@ func _on_OptionsBack_pressed():
 
 
 # Levels
-func _on_01_pressed():
-	emit_signal("level_selected", 1)
+func _on_Levels_level_button_pressed(level):
+	emit_signal("level_selected", level)
 
 
 # Pause menu
@@ -55,3 +55,4 @@ func _on_QuitLevel_pressed():
 	levelSelectMenu.set_deferred("visible", true)
 	pauseMenu.set_deferred("visible", false)
 	emit_signal("level_unselected")
+
