@@ -8,21 +8,23 @@ func _ready():
 
 
 func _input(event):
-	# just for testing
-	if event.is_action_pressed("ui_cancel") and ui.visible == false:
-		print('open menu')
+	if event.is_action_pressed("ui_cancel"):
 		get_tree().paused = true
 		ui.set_deferred("visible", true)
-		field.set_deferred("visible", false)
+		ui.openPauseMenu()
 		
 
-
-func _on_UI_pressed_play():
+func _on_UI_level_selected(level):
 	ui.set_deferred("visible", false)
+	ui.levelSelectMenu.set_deferred("visible", false)
 	field.set_deferred("visible", true)
-	field.begin_game()
+	field.begin_game(level)
 	get_tree().paused = false
 
 
-func _on_UI_pressed_quit():
-	get_tree().quit()
+func _on_UI_unpaused():
+	get_tree().paused = false
+
+
+func _on_UI_level_unselected():
+	field.set_deferred("visible", false)

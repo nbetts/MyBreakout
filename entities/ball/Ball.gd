@@ -30,7 +30,6 @@ func _physics_process(delta):
 			x = clamp(x, -500, 500)
 			
 			direction = Vector2(x, direction.y).normalized() * speed
-			print('abs(x)2  ', abs(x))
 		elif collision.collider.is_in_group("brick"):
 			collision.collider.take_hit(damage)
 		
