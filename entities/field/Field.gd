@@ -27,7 +27,7 @@ func _on_Floor_body_entered(body):
 func place_ball():
 	var ball = ball_scene.instance() as Ball
 	add_child(ball)
-	var ballPosition = Vector2(paddle.position.x, paddle.position.y - 12)
+	var ballPosition = Vector2(paddle.position.x, paddle.position.y - 15)
 	ball.put_in_play(ballPosition)
 	ballsInPlay += 1
 

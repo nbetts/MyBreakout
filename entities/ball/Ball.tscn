@@ -10,6 +10,7 @@ radius = 8.0
 [node name="Ball" type="KinematicBody2D" groups=[
 "ball",
 ]]
+scale = Vector2( 1.2, 1.2 )
 collision_layer = 4
 collision_mask = 11
 script = ExtResource( 2 )
