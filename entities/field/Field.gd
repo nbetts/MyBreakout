@@ -13,8 +13,8 @@ var ballsInPlay = 0
 var max_level_score = 0
 
 onready var paddle = $Paddle
-onready var livesIndicator = $LivesIndicator
-onready var scoreLabel = $ScoreLabel
+onready var livesIndicator = $HUD/LivesIndicator
+onready var scoreLabel = $HUD/ScoreLabel
 
 func _ready():
 	randomize()
@@ -73,5 +73,5 @@ func add_to_score(points):
 
 func update_score(score):
 	player_score = score
-	scoreLabel.text = 'Score: ' + str(score)
+	scoreLabel.text = 'Score   ' + str(score)
 	
