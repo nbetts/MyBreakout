@@ -6,10 +6,14 @@
 [node name="Game" type="Node"]
 script = ExtResource( 2 )
 
-[node name="UI" parent="." instance=ExtResource( 4 )]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource( 4 )]
 pause_mode = 2
 margin_top = 0.474274
 margin_bottom = 0.474243
-[connection signal="level_selected" from="UI" to="." method="_on_UI_level_selected"]
-[connection signal="level_unselected" from="UI" to="." method="_on_UI_level_unselected"]
-[connection signal="unpaused" from="UI" to="." method="_on_UI_unpaused"]
+rect_rotation = 0.13786
+[connection signal="level_selected" from="CanvasLayer/UI" to="." method="_on_UI_level_selected"]
+[connection signal="level_unselected" from="CanvasLayer/UI" to="." method="_on_UI_level_unselected"]
+[connection signal="unpaused" from="CanvasLayer/UI" to="." method="_on_UI_unpaused"]

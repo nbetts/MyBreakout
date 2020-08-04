@@ -27,8 +27,9 @@ func update_color():
 func take_hit(damage):
 	var damageTaken = min(damage, health)
 	health -= damageTaken
+	emit_signal("damageTaken", damageTaken)
+
 	if health > 0:
 		update_color()
-		emit_signal("damageTaken", damageTaken)
 	else:
 		queue_free()

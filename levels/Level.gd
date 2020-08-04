@@ -3,10 +3,12 @@ extends Node2D
 
 signal damageTaken(damage)
 
+export var max_level_score = 0
+
 func _ready():
-	var children = get_children()
-	for child in children:
+	for child in get_children():
 		child.connect("damageTaken", self, "emit_damage")
+		max_level_score += child.health
 
 
 func emit_damage(damage):

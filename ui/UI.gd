@@ -9,6 +9,7 @@ onready var levelSelectMenu = $LevelSelectMenu
 onready var optionsMenu = $OptionsMenu
 onready var pauseMenu = $PauseMenu
 onready var gameOverMenu = $GameOverMenu
+onready var gameOverMenuLabel = $GameOverMenu/GameOverLabel
 
 var current_level = 1
 
@@ -62,13 +63,29 @@ func _on_QuitLevel_pressed():
 
 
 # Game over screen
-func _on_RestartLevel_pressed():
+func _on_GameOverRestartLevel_pressed():
 	gameOverMenu.set_deferred("visible", false)
 	emit_signal("level_selected", current_level)
 	
 
 func _on_GameOverLevelSelect_pressed():
 	gameOverMenu.set_deferred("visible", false)
-	levelSelectMenu.set_deferred("visible", false)
+	levelSelectMenu.set_deferred("visible", true)
 	emit_signal("level_unselected")
 
+
+# Game over screen
+func openGameOverMenu(label):
+	gameOverMenuLabel.text = label
+	gameOverMenu.set_deferred("visible", true)
+
+
+func _on_GameWonRestartLevel_pressed():
+	gameOverMenu.set_deferred("visible", false)
+	emit_signal("level_selected", current_level)
+	
+
+func _on_GameWonLevelSelect_pressed():
+	gameOverMenu.set_deferred("visible", false)
+	levelSelectMenu.set_deferred("visible", true)
+	emit_signal("level_unselected")
