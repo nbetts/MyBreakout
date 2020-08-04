@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/field/Field.gd"
 }, {
+"base": "Node2D",
+"class": "Level",
+"language": "GDScript",
+"path": "res://levels/Level.gd"
+}, {
 "base": "Button",
 "class": "MyButton",
 "language": "GDScript",
@@ -38,6 +43,7 @@ _global_script_class_icons={
 "Ball": "",
 "Brick": "",
 "Field": "",
+"Level": "",
 "MyButton": "",
 "Paddle": ""
 }
@@ -83,5 +89,5 @@ ui_right={
 
 [rendering]
 
-environment/default_clear_color=Color( 0.0627451, 0.0509804, 0.0784314, 1 )
+environment/default_clear_color=Color( 0.113725, 0.101961, 0.129412, 1 )
 environment/default_environment="res://default_env.tres"

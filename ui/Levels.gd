@@ -25,7 +25,6 @@ func _ready():
 	for level in levels:
 		var level_button = MyButton.new()
 		level_button.text = "%02d" % level
-		print('level ', level)
 		level_button.connect("pressed", self, "level_button_press", [level])
 		add_child(level_button)
 

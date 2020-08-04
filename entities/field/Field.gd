@@ -1,19 +1,24 @@
 class_name Field
 extends Node2D
 
-signal ball_fell_through_floor
+signal game_over
 
 const ball_scene = preload("res://entities/ball/Ball.tscn")
 var ball = null
-var ballsInPlay = 0
 var current_level = null
-var max_level_score = 0
+
+var player_lives = 0
 var player_score = 0
+var ballsInPlay = 0
+var max_level_score = 0
 
 onready var paddle = $Paddle
+onready var livesIndicator = $LivesIndicator
+onready var scoreLabel = $ScoreLabel
 
 func _ready():
 	randomize()
+	
 
 
 func _input(event):
@@ -23,6 +28,7 @@ func _input(event):
 
 
 func _on_Floor_body_entered(body):
+	update_lives(player_lives - 1)
 	ballsInPlay -= 1
 
 	if ballsInPlay <= 0:
@@ -31,23 +37,41 @@ func _on_Floor_body_entered(body):
 
 func place_ball():
 	ball = ball_scene.instance()
-	add_child(ball)
+	call_deferred("add_child", ball)
 	var ballPosition = Vector2(paddle.position.x, paddle.position.y - 15)
 	ball.put_in_play(ballPosition)
 	ballsInPlay += 1
 
 
 func begin_game(level):
-	player_score = 0
 	var current_level_scene = load("res://levels/Level%d.tscn" % level)
 	
 	if current_level != null:
 		remove_child(current_level)
 
-	current_level = current_level_scene.instance()
+	current_level = current_level_scene.instance() as Level
+	current_level.connect("damageTaken", self, "add_to_score")
 	add_child(current_level)
-	
 	
 	paddle.position.x = get_viewport_rect().size.x / 2
 	place_ball()
-	# todo: place bricks
+	update_lives(3)
+	update_score(0)
+
+
+func update_lives(lives):
+	player_lives = lives
+	livesIndicator.rect_size.x = lives * 40
+	
+	if (lives <= 0):
+		emit_signal("game_over")
+
+
+func add_to_score(points):
+	update_score(player_score + points)
+
+
+func update_score(score):
+	player_score = score
+	scoreLabel.text = 'Score: ' + str(score)
+	

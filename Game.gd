@@ -26,6 +26,7 @@ func _on_UI_level_selected(level):
 	
 	# add field scene
 	field = field_scene.instance()
+	field.connect("game_over", self, "game_over");
 	add_child(field)
 	field.begin_game(level)
 	get_tree().paused = false
@@ -33,3 +34,8 @@ func _on_UI_level_selected(level):
 
 func _on_UI_level_unselected():
 	field.queue_free()
+
+
+func game_over():
+	get_tree().paused = true
+	ui.gameOverMenu.set_deferred("visible", true)
