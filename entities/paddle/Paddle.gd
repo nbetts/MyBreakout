@@ -7,7 +7,7 @@ export var friction = 120
 
 var velocity = Vector2.ZERO
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	move()
 
 func move():

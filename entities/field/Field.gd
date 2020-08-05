@@ -26,7 +26,7 @@ func _input(event):
 		place_ball()
 
 
-func _on_Floor_body_entered(body):
+func _on_Floor_body_entered(_body):
 	ballsInPlay -= 1
 	
 	if (ballsInPlay <= 0):

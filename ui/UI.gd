@@ -16,7 +16,7 @@ var current_level = 1
 # Main menu
 func _on_Play_pressed():
 	mainMenu.set_deferred("visible", false)
-	levelSelectMenu.set_deferred("visible", true)
+	showLevelSelectMenu()
 
 
 func _on_Options_pressed():
@@ -32,6 +32,14 @@ func _on_Quit_pressed():
 func _on_LevelSelectBack_pressed():
 	mainMenu.set_deferred("visible", true)
 	levelSelectMenu.set_deferred("visible", false)
+
+
+func showLevelSelectMenu():
+	# todo: update level buttons that are completed to green
+	#for level_button in levelSelectMenu.get_child(0).get_children():
+	#	level_button.set("custom_colors/font_color", "#5ce614")
+
+	levelSelectMenu.set_deferred("visible", true)
 
 
 # Options menu
@@ -57,7 +65,7 @@ func _on_Continue_pressed():
 
 
 func _on_QuitLevel_pressed():
-	levelSelectMenu.set_deferred("visible", true)
+	showLevelSelectMenu()
 	pauseMenu.set_deferred("visible", false)
 	emit_signal("level_unselected")
 
@@ -70,7 +78,7 @@ func _on_GameOverRestartLevel_pressed():
 
 func _on_GameOverLevelSelect_pressed():
 	gameOverMenu.set_deferred("visible", false)
-	levelSelectMenu.set_deferred("visible", true)
+	showLevelSelectMenu()
 	emit_signal("level_unselected")
 
 
@@ -87,5 +95,5 @@ func _on_GameWonRestartLevel_pressed():
 
 func _on_GameWonLevelSelect_pressed():
 	gameOverMenu.set_deferred("visible", false)
-	levelSelectMenu.set_deferred("visible", true)
+	showLevelSelectMenu()
 	emit_signal("level_unselected")

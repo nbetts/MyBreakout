@@ -3,7 +3,7 @@
 [ext_resource path="res://entities/brick/Brick.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 64, 16 )
+extents = Vector2( 48, 16 )
 
 [node name="Brick" type="StaticBody2D" groups=[
 "brick",
@@ -16,6 +16,5 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-scale = Vector2( 1.33333, 1 )
-color = Color( 0.364706, 0.054902, 0.913725, 1 )
+color = Color( 0.764706, 0.0313726, 0.203922, 1 )
 polygon = PoolVector2Array( -48, -16, 48, -16, 48, 16, -48, 16, -48, -16 )

@@ -12,7 +12,6 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().paused = true
-		#ui.set_deferred("visible", true)
 		ui.openPauseMenu()
 		
 
@@ -21,12 +20,11 @@ func _on_UI_unpaused():
 
 
 func _on_UI_level_selected(level):
-	#ui.set_deferred("visible", false)
 	ui.levelSelectMenu.set_deferred("visible", false)
 	
 	# add field scene
 	if field != null:
-		field.queue_free()
+		unmount_field()
 
 	field = field_scene.instance()
 	field.connect("game_won", self, "game_won");
@@ -37,7 +35,7 @@ func _on_UI_level_selected(level):
 
 
 func _on_UI_level_unselected():
-	field.queue_free()
+	unmount_field()
 
 
 func game_won():
@@ -48,3 +46,7 @@ func game_won():
 func game_over():
 	ui.openGameOverMenu('Game Over!')
 	get_tree().paused = true
+
+
+func unmount_field():
+	field.queue_free()

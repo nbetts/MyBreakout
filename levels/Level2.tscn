@@ -6,10 +6,6 @@
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Brick" parent="." instance=ExtResource( 1 )]
-position = Vector2( 512, 128 )
-health = 1
-
 [node name="Brick2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 616, 128 )
 health = 1
@@ -19,7 +15,7 @@ position = Vector2( 408, 128 )
 health = 1
 
 [node name="Brick4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 304, 128 )
+position = Vector2( 200, 128 )
 health = 1
 
 [node name="Brick11" parent="." instance=ExtResource( 1 )]
@@ -27,23 +23,23 @@ position = Vector2( 304, 168 )
 health = 1
 
 [node name="Brick12" parent="." instance=ExtResource( 1 )]
-position = Vector2( 304, 208 )
+position = Vector2( 200, 208 )
 health = 1
 
 [node name="Brick13" parent="." instance=ExtResource( 1 )]
 position = Vector2( 304, 248 )
-health = 1
+health = 2
 
 [node name="Brick14" parent="." instance=ExtResource( 1 )]
-position = Vector2( 304, 288 )
+position = Vector2( 200, 288 )
 health = 1
 
 [node name="Brick5" parent="." instance=ExtResource( 1 )]
-position = Vector2( 720, 128 )
+position = Vector2( 824, 128 )
 health = 1
 
 [node name="Brick6" parent="." instance=ExtResource( 1 )]
-position = Vector2( 512, 368 )
+position = Vector2( 512, 328 )
 health = 1
 
 [node name="Brick7" parent="." instance=ExtResource( 1 )]
@@ -55,35 +51,35 @@ position = Vector2( 408, 368 )
 health = 1
 
 [node name="Brick21" parent="." instance=ExtResource( 1 )]
-position = Vector2( 512, 328 )
-health = 1
+position = Vector2( 512, 248 )
+health = 2
 
 [node name="Brick22" parent="." instance=ExtResource( 1 )]
-position = Vector2( 616, 328 )
-health = 1
+position = Vector2( 616, 288 )
+health = 2
 
 [node name="Brick23" parent="." instance=ExtResource( 1 )]
-position = Vector2( 408, 328 )
-health = 1
+position = Vector2( 408, 288 )
+health = 2
 
 [node name="Brick24" parent="." instance=ExtResource( 1 )]
+position = Vector2( 616, 208 )
+health = 2
+
+[node name="Brick25" parent="." instance=ExtResource( 1 )]
 position = Vector2( 512, 168 )
 health = 1
 
-[node name="Brick25" parent="." instance=ExtResource( 1 )]
-position = Vector2( 616, 168 )
-health = 1
-
 [node name="Brick26" parent="." instance=ExtResource( 1 )]
-position = Vector2( 408, 168 )
-health = 1
+position = Vector2( 408, 208 )
+health = 2
 
 [node name="Brick19" parent="." instance=ExtResource( 1 )]
-position = Vector2( 304, 368 )
+position = Vector2( 200, 368 )
 health = 1
 
 [node name="Brick20" parent="." instance=ExtResource( 1 )]
-position = Vector2( 720, 368 )
+position = Vector2( 824, 368 )
 health = 1
 
 [node name="Brick9" parent="." instance=ExtResource( 1 )]
@@ -95,15 +91,15 @@ position = Vector2( 720, 168 )
 health = 1
 
 [node name="Brick16" parent="." instance=ExtResource( 1 )]
-position = Vector2( 720, 208 )
+position = Vector2( 824, 208 )
 health = 1
 
 [node name="Brick17" parent="." instance=ExtResource( 1 )]
 position = Vector2( 720, 248 )
-health = 1
+health = 2
 
 [node name="Brick18" parent="." instance=ExtResource( 1 )]
-position = Vector2( 720, 288 )
+position = Vector2( 824, 288 )
 health = 1
 
 [node name="Brick10" parent="." instance=ExtResource( 1 )]
