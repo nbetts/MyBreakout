@@ -1,99 +1,72 @@
 extends Control
 
-signal unpaused
+signal quitted
+signal all_menus_hidden
+signal menu_opened(menu_name)
+signal level_select_menu_opened
 signal level_selected(level)
-signal level_unselected
+signal level_restarted
 
-onready var mainMenu = $MainMenu
-onready var levelSelectMenu = $LevelSelectMenu
-onready var optionsMenu = $OptionsMenu
-onready var pauseMenu = $PauseMenu
-onready var gameOverMenu = $GameOverMenu
 onready var gameOverMenuLabel = $GameOverMenu/GameOverLabel
-
-var current_level = 1
 
 # Main menu
 func _on_Play_pressed():
-	mainMenu.set_deferred("visible", false)
-	showLevelSelectMenu()
+	emit_signal("level_select_menu_opened")
 
 
 func _on_Options_pressed():
-	mainMenu.set_deferred("visible", false)
-	optionsMenu.set_deferred("visible", true)
+	emit_signal("menu_opened", "OptionsMenu")
 
 
 func _on_Quit_pressed():
-	get_tree().quit()
+	emit_signal("quitted")
 
 
 # Level select menu
 func _on_LevelSelectBack_pressed():
-	mainMenu.set_deferred("visible", true)
-	levelSelectMenu.set_deferred("visible", false)
+	emit_signal("menu_opened", "MainMenu")
 
 
-func showLevelSelectMenu():
-	# todo: update level buttons that are completed to green
-	#for level_button in levelSelectMenu.get_child(0).get_children():
-	#	level_button.set("custom_colors/font_color", "#5ce614")
-
-	levelSelectMenu.set_deferred("visible", true)
+func _on_Levels_level_button_pressed(level):
+	emit_signal("level_selected", level)
 
 
 # Options menu
 func _on_OptionsBack_pressed():
-	mainMenu.set_deferred("visible", true)
-	optionsMenu.set_deferred("visible", false)
-
-
-# Levels
-func _on_Levels_level_button_pressed(level):
-	current_level = level
-	emit_signal("level_selected", current_level)
+	emit_signal("menu_opened", "MainMenu")
 
 
 # Pause menu
 func openPauseMenu():
-	pauseMenu.set_deferred("visible", true)
+	emit_signal("menu_opened", "PauseMenu")
 
 
 func _on_Continue_pressed():
-	pauseMenu.set_deferred("visible", false)
-	emit_signal("unpaused")
+	emit_signal("all_menus_hidden")
 
 
 func _on_QuitLevel_pressed():
-	showLevelSelectMenu()
-	pauseMenu.set_deferred("visible", false)
-	emit_signal("level_unselected")
+	emit_signal("level_select_menu_opened")
 
 
 # Game over screen
 func _on_GameOverRestartLevel_pressed():
-	gameOverMenu.set_deferred("visible", false)
-	emit_signal("level_selected", current_level)
+	emit_signal("level_restarted")
 	
 
 func _on_GameOverLevelSelect_pressed():
-	gameOverMenu.set_deferred("visible", false)
-	showLevelSelectMenu()
-	emit_signal("level_unselected")
+	emit_signal("level_select_menu_opened")
 
 
 # Game over screen
-func openGameOverMenu(label):
+func open_game_over_menu(label):
 	gameOverMenuLabel.text = label
-	gameOverMenu.set_deferred("visible", true)
+	emit_signal("menu_opened", "GameOverMenu")
 
 
 func _on_GameWonRestartLevel_pressed():
-	gameOverMenu.set_deferred("visible", false)
-	emit_signal("level_selected", current_level)
+	emit_signal("level_restarted")
 	
 
 func _on_GameWonLevelSelect_pressed():
-	gameOverMenu.set_deferred("visible", false)
-	showLevelSelectMenu()
-	emit_signal("level_unselected")
+	emit_signal("level_select_menu_opened")
