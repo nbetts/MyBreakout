@@ -24,7 +24,7 @@ func _physics_process(delta):
 			# Allow the paddle to give the ball some momentum
 			var x = direction.x + (collision.collider_velocity.x / 2)
 			# The nearer the edge of the paddle, the more sideways velocity
-			x+= (position.x - collision.collider.position.x) * 8
+			x+= (position.x - collision.collider.position.x) * 12
 			
 			# clamp the sideways velocity so that the ball doesn't take ages to travel
 			x = clamp(x, -500, 500)
