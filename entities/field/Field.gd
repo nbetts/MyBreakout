@@ -15,16 +15,6 @@ onready var paddle = $Paddle
 onready var livesIndicator = $CanvasLayer/HUD/LivesIndicator
 onready var scoreLabel = $CanvasLayer/HUD/ScoreLabel
 
-func _ready():
-	randomize()
-	
-
-
-func _input(event):
-	# just for testing
-	if event.is_action_pressed("ui_down"):
-		place_ball()
-
 
 func _on_Floor_body_entered(_body):
 	ballsInPlay -= 1
@@ -34,16 +24,13 @@ func _on_Floor_body_entered(_body):
 		if (player_lives <= 0):
 			emit_signal("game_over")
 		else:
-			place_ball()
+			add_ball_to_field()
 
 
-func place_ball():
+func add_ball_to_field():
 	var ball = ball_scene.instance()
 	call_deferred("add_child", ball)
-	var ballRadius = ball.get_node("CollisionShape2D").shape.radius
-	print('ballRadius', ballRadius)
-	var ballPosition = Vector2(paddle.position.x, paddle.position.y - ballRadius - 4)
-	ball.put_in_play(ballPosition)
+	ball.set_start_direction()
 	ballsInPlay += 1
 
 
@@ -63,7 +50,7 @@ func begin_game(level):
 	
 	# Reset level variables
 	ballsInPlay = 0
-	place_ball()
+	add_ball_to_field()
 	update_lives(3)
 	update_score(0)
 

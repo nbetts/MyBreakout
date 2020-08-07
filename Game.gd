@@ -7,6 +7,7 @@ var field = null
 var current_level = null
 
 func _ready():
+	randomize()
 	pause()
 
 
