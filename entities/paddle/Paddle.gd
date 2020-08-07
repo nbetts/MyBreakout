@@ -1,7 +1,7 @@
 class_name Paddle
 extends KinematicBody2D
 
-export var acceleration = 70
+export var acceleration = 120
 export var max_speed = 900
 export var friction = 120
 
