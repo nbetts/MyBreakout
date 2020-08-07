@@ -58,6 +58,11 @@ func begin_game(level):
 func update_lives(lives):
 	player_lives = lives
 	livesIndicator.rect_size.x = lives * 40
+	
+	if (lives > 0):
+		livesIndicator.show()
+	else:
+		livesIndicator.hide()
 
 
 func add_to_score(points):
