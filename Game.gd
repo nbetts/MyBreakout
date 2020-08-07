@@ -2,6 +2,7 @@ extends Node
 
 onready var field_scene = preload("res://entities/field/Field.tscn")
 onready var ui = $CanvasLayer/UI
+onready var blur_shader = $CanvasLayer/BlurShader
 
 var field = null
 var current_level = null
@@ -31,28 +32,33 @@ func unpause():
 
 func hide_all_menus():
 	for menu in ui.get_children():
-		menu.hide()
+		if menu.is_in_group("Menus"):
+			menu.hide()
 
+	blur_shader.hide()
 	unpause()
 
 
 func open_menu(menu_name):
 	for menu in ui.get_children():
-		if (menu.get_name() == menu_name):
-			menu.show()
-			pause()
-			
-			# Focus on first button
-			var child = menu
-			var child_count = menu.get_child_count()
-			while child_count > 0 and not (child is Button or child is MyButton):
-				child = child.get_child(0)
-				child_count = child.get_child_count()
-			
-			if (child is Button or child is MyButton):
-				child.grab_focus()
-		else:
-			menu.hide()
+		if menu.is_in_group("Menus"):
+			if (menu.get_name() == menu_name):
+				menu.show()
+				pause()
+				if field != null and field.is_playing:
+					blur_shader.show()
+				
+				# Focus on first button
+				var child = menu
+				var child_count = menu.get_child_count()
+				while child_count > 0 and not (child is Button or child is MyButton):
+					child = child.get_child(0)
+					child_count = child.get_child_count()
+				
+				if (child is Button or child is MyButton):
+					child.grab_focus()
+			else:
+				menu.hide()
 
 
 func open_level_select_menu():
@@ -90,9 +96,10 @@ func game_over():
 
 func unmount_level():
 	current_level = null
-
 	if field != null:
+		field.end_game()
 		field.queue_free()
+		blur_shader.hide()
 
 
 func _on_UI_quitted():

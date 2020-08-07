@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
+[ext_resource path="res://shaders/blur.shader" type="Shader" id=1]
 [ext_resource path="res://Game.gd" type="Script" id=2]
 [ext_resource path="res://ui/UI.tscn" type="PackedScene" id=4]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/blur = 1.5
+shader_param/darken = 1.0
 
 [node name="Game" type="Node"]
 script = ExtResource( 2 )
@@ -9,6 +15,20 @@ script = ExtResource( 2 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 pause_mode = 2
 layer = 10
+
+[node name="BlurShader" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.679932
+margin_top = -0.679871
+margin_right = 0.679932
+margin_bottom = -0.679871
+color = Color( 1, 1, 1, 0.501961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="UI" parent="CanvasLayer" instance=ExtResource( 4 )]
 margin_top = 0.474274

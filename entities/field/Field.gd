@@ -5,8 +5,10 @@ signal game_won
 signal game_over
 
 const ball_scene = preload("res://entities/ball/Ball.tscn")
-var current_level = null
 
+
+var current_level = null
+var is_playing = false
 var player_lives = 0
 var player_score = 0
 var ballsInPlay = 0
@@ -53,7 +55,13 @@ func begin_game(level):
 	add_ball_to_field()
 	update_lives(3)
 	update_score(0)
+	is_playing = true
 
+
+func end_game():
+	is_playing = false
+	current_level.queue_free()
+	
 
 func update_lives(lives):
 	player_lives = lives
