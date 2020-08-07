@@ -15,4 +15,3 @@ __meta__ = {
 stream = ExtResource( 2 )
 volume_db = -6.0
 [connection signal="button_down" from="." to="." method="_on_MyButton_button_down"]
-[connection signal="focus_entered" from="." to="." method="_on_Button_focus_entered"]

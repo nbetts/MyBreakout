@@ -9,6 +9,7 @@ var current_level = null
 func _ready():
 	randomize()
 	pause()
+	open_menu("MainMenu")
 
 
 func _input(event):
@@ -40,6 +41,16 @@ func open_menu(menu_name):
 		if (menu.get_name() == menu_name):
 			menu.show()
 			pause()
+			
+			# Focus on first button
+			var child = menu
+			var child_count = menu.get_child_count()
+			while child_count > 0 and not (child is Button or child is MyButton):
+				child = child.get_child(0)
+				child_count = child.get_child_count()
+			
+			if (child is Button or child is MyButton):
+				child.grab_focus()
 		else:
 			menu.hide()
 
