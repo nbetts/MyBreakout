@@ -7,10 +7,10 @@
 script = ExtResource( 2 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+pause_mode = 2
 layer = 10
 
 [node name="UI" parent="CanvasLayer" instance=ExtResource( 4 )]
-pause_mode = 2
 margin_top = 0.474274
 margin_bottom = 0.474243
 rect_rotation = 0.13786

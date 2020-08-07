@@ -106,7 +106,7 @@ text = "Continue"
 [node name="QuitLevel" parent="PauseMenu" instance=ExtResource( 4 )]
 text = "Quit Level"
 
-[node name="GameOverMenu" type="VBoxContainer" parent="." groups=[
+[node name="LevelWonMenu" type="VBoxContainer" parent="." groups=[
 "Menus",
 ]]
 visible = false
@@ -115,25 +115,60 @@ margin_top = 349.0
 margin_right = 748.0
 margin_bottom = 418.0
 
-[node name="GameOverLabel" type="Label" parent="GameOverMenu"]
+[node name="Label" type="Label" parent="LevelWonMenu"]
 margin_right = 473.0
 margin_bottom = 54.0
-text = "Game Over!"
+text = "Level lost"
 align = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GameOverMenu"]
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelWonMenu"]
 margin_top = 74.0
 margin_right = 473.0
 margin_bottom = 122.0
 
-[node name="GameOverRestartLevel" parent="GameOverMenu/HBoxContainer" instance=ExtResource( 4 )]
+[node name="LevelWonRestartLevel" parent="LevelWonMenu/HBoxContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 246.0
 margin_bottom = 48.0
 text = "Restart Level"
 
-[node name="GameOverLevelSelect" parent="GameOverMenu/HBoxContainer" instance=ExtResource( 4 )]
+[node name="LevelWonLevelSelect" parent="LevelWonMenu/HBoxContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 250.0
+margin_right = 473.0
+margin_bottom = 48.0
+text = "Level Select"
+
+[node name="LevelLostMenu" type="VBoxContainer" parent="." groups=[
+"Menus",
+]]
+visible = false
+margin_left = 275.0
+margin_top = 349.0
+margin_right = 748.0
+margin_bottom = 418.0
+
+[node name="Label" type="Label" parent="LevelLostMenu"]
+margin_right = 473.0
+margin_bottom = 54.0
+text = "Level complete!"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelLostMenu"]
+margin_top = 74.0
+margin_right = 473.0
+margin_bottom = 122.0
+
+[node name="LevelLostRestartLevel" parent="LevelLostMenu/HBoxContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 246.0
+margin_bottom = 48.0
+text = "Restart Level"
+
+[node name="LevelLostLevelSelect" parent="LevelLostMenu/HBoxContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 250.0
@@ -148,5 +183,7 @@ text = "Level Select"
 [connection signal="pressed" from="OptionsMenu/OptionsBack" to="." method="_on_OptionsBack_pressed"]
 [connection signal="pressed" from="PauseMenu/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="PauseMenu/QuitLevel" to="." method="_on_QuitLevel_pressed"]
-[connection signal="pressed" from="GameOverMenu/HBoxContainer/GameOverRestartLevel" to="." method="_on_GameOverRestartLevel_pressed"]
-[connection signal="pressed" from="GameOverMenu/HBoxContainer/GameOverLevelSelect" to="." method="_on_GameOverLevelSelect_pressed"]
+[connection signal="pressed" from="LevelWonMenu/HBoxContainer/LevelWonRestartLevel" to="." method="_on_LevelWonRestartLevel_pressed"]
+[connection signal="pressed" from="LevelWonMenu/HBoxContainer/LevelWonLevelSelect" to="." method="_on_LevelWonLevelSelect_pressed"]
+[connection signal="pressed" from="LevelLostMenu/HBoxContainer/LevelLostRestartLevel" to="." method="_on_LevelLostRestartLevel_pressed"]
+[connection signal="pressed" from="LevelLostMenu/HBoxContainer/LevelLostLevelSelect" to="." method="_on_LevelLostLevelSelect_pressed"]

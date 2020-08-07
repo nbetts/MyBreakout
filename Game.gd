@@ -22,11 +22,11 @@ func quit():
 
 
 func pause():
-	get_tree().paused = true
+	get_tree().set_deferred("paused", true)
 
 
 func unpause():
-	get_tree().paused = false
+	get_tree().set_deferred("paused", false)
 
 
 func hide_all_menus():
@@ -81,11 +81,11 @@ func restart_level():
 
 
 func game_won():
-	ui.open_game_over_menu('You Won!')
+	open_menu("LevelWonMenu")
 
 
 func game_over():
-	ui.open_game_over_menu('Game Over!')
+	open_menu("LevelLostMenu")
 
 
 func unmount_level():

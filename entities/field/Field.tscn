@@ -59,6 +59,7 @@ shape = SubResource( 4 )
 position = Vector2( 512, 716 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+pause_mode = 2
 layer = 10
 
 [node name="HUD" type="Control" parent="CanvasLayer"]

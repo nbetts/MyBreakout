@@ -7,8 +7,6 @@ signal level_select_menu_opened
 signal level_selected(level)
 signal level_restarted
 
-onready var gameOverMenuLabel = $GameOverMenu/GameOverLabel
-
 # Main menu
 func _on_Play_pressed():
 	emit_signal("level_select_menu_opened")
@@ -49,24 +47,18 @@ func _on_QuitLevel_pressed():
 	emit_signal("level_select_menu_opened")
 
 
-# Game over screen
-func _on_GameOverRestartLevel_pressed():
+# Level over screen
+func _on_LevelWonRestartLevel_pressed():
 	emit_signal("level_restarted")
-	
 
-func _on_GameOverLevelSelect_pressed():
+
+func _on_LevelWonLevelSelect_pressed():
 	emit_signal("level_select_menu_opened")
 
 
-# Game over screen
-func open_game_over_menu(label):
-	gameOverMenuLabel.text = label
-	emit_signal("menu_opened", "GameOverMenu")
-
-
-func _on_GameWonRestartLevel_pressed():
+func _on_LevelLostRestartLevel_pressed():
 	emit_signal("level_restarted")
-	
 
-func _on_GameWonLevelSelect_pressed():
+
+func _on_LevelLostLevelSelect_pressed():
 	emit_signal("level_select_menu_opened")
