@@ -40,7 +40,9 @@ func _on_Floor_body_entered(_body):
 func place_ball():
 	var ball = ball_scene.instance()
 	call_deferred("add_child", ball)
-	var ballPosition = Vector2(paddle.position.x, paddle.position.y - 15)
+	var ballRadius = ball.get_node("CollisionShape2D").shape.radius
+	print('ballRadius', ballRadius)
+	var ballPosition = Vector2(paddle.position.x, paddle.position.y - ballRadius - 4)
 	ball.put_in_play(ballPosition)
 	ballsInPlay += 1
 
