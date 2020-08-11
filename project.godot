@@ -59,10 +59,6 @@ config/icon="res://icon.png"
 
 window/size/height=768
 
-[gui]
-
-theme/custom_font="res://ui/windows_command_prompt.tres"
-
 [input]
 
 ui_left={
