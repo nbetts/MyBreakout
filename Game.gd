@@ -4,6 +4,12 @@ onready var field_scene = preload("res://entities/field/Field.tscn")
 onready var ui = $CanvasLayer/UI
 onready var blur_shader = $CanvasLayer/BlurShader
 
+const save_file_name = "user://user_data.save"
+var default_user_data = {
+	"levels_completed": []
+}
+var user_data = {}
+
 var field = null
 var current_level = null
 
@@ -11,11 +17,34 @@ func _ready():
 	randomize()
 	pause()
 	open_menu("MainMenu")
+	load_user_data()
 
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		ui.openPauseMenu()
+
+
+func load_user_data():
+	var save_file = File.new()
+	if save_file.file_exists(save_file_name):
+		save_file.open(save_file_name, File.READ)
+		user_data = parse_json(save_file.get_line())
+		save_file.close()
+	else:
+		reset_user_data()
+
+
+func save_user_data():
+	var save_file = File.new()
+	save_file.open(save_file_name, File.WRITE)
+	save_file.store_line(to_json(user_data))
+	save_file.close()
+
+
+func reset_user_data():
+	user_data = default_user_data.duplicate()
+	save_user_data()
 
 
 func quit():
@@ -64,9 +93,19 @@ func open_menu(menu_name):
 func open_level_select_menu():
 	unmount_level()
 	open_menu("LevelSelectMenu")
-	# todo: update level button colours to green if they have been completed
-	#for level_button in levelSelectMenu.get_child(0).get_children():
-	#	level_button.set("custom_colors/font_color", "#5ce614")
+	
+	# enable/disable level buttons based on which levels have been completed
+	var automaticallyEnableLevelButton = true
+
+	for level_button in ui.get_node("LevelSelectMenu/Levels").get_children():
+		if int(level_button.text) in user_data["levels_completed"]:
+			level_button.set("disabled", false)
+			automaticallyEnableLevelButton = true
+		elif automaticallyEnableLevelButton:
+			level_button.set("disabled", false)
+			automaticallyEnableLevelButton = false
+		else:
+			level_button.set("disabled", true)
 
 
 func play_level(level):
@@ -88,6 +127,11 @@ func restart_level():
 
 func game_won():
 	open_menu("LevelWonMenu")
+	if not current_level in user_data["levels_completed"]:
+		var levels_completed = user_data["levels_completed"]
+		levels_completed.append(current_level)
+		user_data["levels_completed"] = levels_completed
+		save_user_data()
 
 
 func game_over():
