@@ -78,15 +78,27 @@ text = "Back"
 "Menus",
 ]]
 visible = false
-margin_left = 449.0
-margin_top = 360.0
-margin_right = 574.0
-margin_bottom = 408.0
+margin_left = 375.0
+margin_top = 326.0
+margin_right = 648.0
+margin_bottom = 442.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="OptionsClearUserData" parent="OptionsMenu" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 273.0
+margin_bottom = 48.0
+text = "Reset user data"
+
 [node name="OptionsBack" parent="OptionsMenu" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 68.0
+margin_right = 273.0
+margin_bottom = 116.0
 text = "Back"
 
 [node name="PauseMenu" type="VBoxContainer" parent="." groups=[
@@ -116,6 +128,7 @@ text = "Quit Level"
 [node name="LevelWonMenu" type="VBoxContainer" parent="." groups=[
 "Menus",
 ]]
+visible = false
 margin_left = 275.0
 margin_top = 323.0
 margin_right = 748.0
@@ -124,7 +137,7 @@ margin_bottom = 445.0
 [node name="Label" type="Label" parent="LevelWonMenu"]
 margin_right = 473.0
 margin_bottom = 54.0
-text = "Level lost"
+text = "Level complete!"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="LevelWonMenu"]
@@ -159,7 +172,7 @@ margin_bottom = 445.0
 [node name="Label" type="Label" parent="LevelLostMenu"]
 margin_right = 473.0
 margin_bottom = 1.0
-text = "Level complete!"
+text = "Level lost"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="LevelLostMenu"]
@@ -181,11 +194,28 @@ margin_left = 250.0
 margin_right = 473.0
 margin_bottom = 48.0
 text = "Level Select"
+
+[node name="UserDataClearedMenu" type="VBoxContainer" parent="." groups=[
+"Menus",
+]]
+visible = false
+margin_left = 360.0
+margin_top = 360.0
+margin_right = 664.0
+margin_bottom = 408.0
+
+[node name="UserDataClearedButton" parent="UserDataClearedMenu" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 304.0
+margin_bottom = 48.0
+text = "User data cleared"
 [connection signal="pressed" from="MainMenu/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="MainMenu/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="MainMenu/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="level_button_pressed" from="LevelSelectMenu/Levels" to="." method="_on_Levels_level_button_pressed"]
 [connection signal="pressed" from="LevelSelectMenu/LevelSelectBack" to="." method="_on_LevelSelectBack_pressed"]
+[connection signal="pressed" from="OptionsMenu/OptionsClearUserData" to="." method="_on_OptionsClearUserData_pressed"]
 [connection signal="pressed" from="OptionsMenu/OptionsBack" to="." method="_on_OptionsBack_pressed"]
 [connection signal="pressed" from="PauseMenu/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="PauseMenu/QuitLevel" to="." method="_on_QuitLevel_pressed"]
@@ -193,3 +223,4 @@ text = "Level Select"
 [connection signal="pressed" from="LevelWonMenu/HBoxContainer/LevelWonLevelSelect" to="." method="_on_LevelWonLevelSelect_pressed"]
 [connection signal="pressed" from="LevelLostMenu/HBoxContainer/LevelLostRestartLevel" to="." method="_on_LevelLostRestartLevel_pressed"]
 [connection signal="pressed" from="LevelLostMenu/HBoxContainer/LevelLostLevelSelect" to="." method="_on_LevelLostLevelSelect_pressed"]
+[connection signal="pressed" from="UserDataClearedMenu/UserDataClearedButton" to="." method="_on_UserDataClearedButton_pressed"]

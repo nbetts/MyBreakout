@@ -56,3 +56,4 @@ environment = SubResource( 2 )
 [connection signal="level_selected" from="CanvasLayer/UI" to="." method="_on_UI_level_selected"]
 [connection signal="menu_opened" from="CanvasLayer/UI" to="." method="_on_UI_menu_opened"]
 [connection signal="quitted" from="CanvasLayer/UI" to="." method="_on_UI_quitted"]
+[connection signal="user_data_cleared" from="CanvasLayer/UI" to="." method="_on_UI_user_data_cleared"]

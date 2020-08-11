@@ -32,7 +32,7 @@ func load_user_data():
 		user_data = parse_json(save_file.get_line())
 		save_file.close()
 	else:
-		reset_user_data()
+		clear_user_data()
 
 
 func save_user_data():
@@ -42,7 +42,7 @@ func save_user_data():
 	save_file.close()
 
 
-func reset_user_data():
+func clear_user_data():
 	user_data = default_user_data.duplicate()
 	save_user_data()
 
@@ -168,3 +168,8 @@ func _on_UI_level_selected(level):
 
 func _on_UI_level_restarted():
 	restart_level()
+
+
+func _on_UI_user_data_cleared():
+	clear_user_data()
+	open_menu("UserDataClearedMenu")
