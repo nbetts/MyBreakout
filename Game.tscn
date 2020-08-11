@@ -1,13 +1,27 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://shaders/blur.shader" type="Shader" id=1]
 [ext_resource path="res://Game.gd" type="Script" id=2]
 [ext_resource path="res://ui/UI.tscn" type="PackedScene" id=4]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
 shader_param/blur = 1.5
 shader_param/darken = 1.0
+
+[sub_resource type="Environment" id=2]
+background_mode = 4
+dof_blur_near_amount = 0.16
+glow_enabled = true
+glow_levels/1 = true
+glow_levels/3 = false
+glow_levels/4 = true
+glow_levels/5 = false
+glow_intensity = 1.1
+glow_strength = 0.57
+glow_blend_mode = 0
+glow_hdr_threshold = 0.2
+glow_bicubic_upscale = true
 
 [node name="Game" type="Node"]
 script = ExtResource( 2 )
@@ -18,7 +32,7 @@ layer = 10
 
 [node name="BlurShader" type="ColorRect" parent="CanvasLayer"]
 visible = false
-material = SubResource( 2 )
+material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 0.679932
@@ -34,6 +48,9 @@ __meta__ = {
 margin_top = 0.474274
 margin_bottom = 0.474243
 rect_rotation = 0.13786
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
 [connection signal="all_menus_hidden" from="CanvasLayer/UI" to="." method="_on_UI_all_menus_hidden"]
 [connection signal="level_restarted" from="CanvasLayer/UI" to="." method="_on_UI_level_restarted"]
 [connection signal="level_select_menu_opened" from="CanvasLayer/UI" to="." method="_on_UI_level_select_menu_opened"]
