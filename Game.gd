@@ -58,7 +58,7 @@ func pause():
 
 func unpause():
 	get_tree().set_deferred("paused", false)
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 
 func hide_all_menus():

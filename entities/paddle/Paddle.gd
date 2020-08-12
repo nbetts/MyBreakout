@@ -8,9 +8,14 @@ export var friction = 120
 var velocity = Vector2.ZERO
 
 func _physics_process(_delta):
-	move()
+	move_using_mouse()
+	
 
-func move():
+func move_using_mouse():
+	move_and_collide(Vector2((get_viewport().get_mouse_position().x-position.x), 0))
+
+
+func move_using_keyboard():
 	# Update the X and Y velocity of the player based on which arrow keys are pressed
 	var inputVector = Vector2.ZERO
 	inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
