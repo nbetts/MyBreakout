@@ -11,7 +11,7 @@ var default_user_data = {
 var user_data = {}
 
 var field = null
-var current_level = null
+var current_level = 1
 
 func _ready():
 	randomize()
@@ -97,10 +97,16 @@ func open_level_select_menu():
 	open_menu("LevelSelectMenu")
 	
 	# enable/disable level buttons based on which levels have been completed
+	var level_buttons = ui.get_node("LevelSelectMenu/Levels").get_children()
 	var automaticallyEnableLevelButton = true
+	
+	if current_level > level_buttons.size():
+		current_level = level_buttons.size()
 
-	for level_button in ui.get_node("LevelSelectMenu/Levels").get_children():
-		if int(level_button.text) in user_data["levels_completed"]:
+	for level_button in level_buttons:
+		var level_number = int(level_button.text)
+		
+		if level_number in user_data["levels_completed"]:
 			level_button.set("disabled", false)
 			automaticallyEnableLevelButton = true
 		elif automaticallyEnableLevelButton:
@@ -108,6 +114,9 @@ func open_level_select_menu():
 			automaticallyEnableLevelButton = false
 		else:
 			level_button.set("disabled", true)
+		
+		if level_number == current_level:
+			level_button.grab_focus()
 
 
 func play_level(level):
@@ -128,6 +137,7 @@ func restart_level():
 
 
 func game_won():
+	current_level += 1
 	open_menu("LevelWonMenu")
 	if not current_level in user_data["levels_completed"]:
 		var levels_completed = user_data["levels_completed"]
@@ -141,7 +151,6 @@ func game_over():
 
 
 func unmount_level():
-	current_level = null
 	if field != null:
 		field.end_game()
 		field.queue_free()
