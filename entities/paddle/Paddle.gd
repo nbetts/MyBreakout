@@ -10,6 +10,7 @@ var mouseDelta = 0
 
 func _physics_process(_delta):
 	move_using_mouse()
+	move_using_keyboard()
 
 
 func _input(event):
