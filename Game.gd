@@ -2,7 +2,7 @@ extends Node
 
 onready var field_scene = preload("res://entities/field/Field.tscn")
 onready var ui = $CanvasLayer/UI
-onready var blur_shader = $CanvasLayer/BlurShader
+onready var worldEnvironment = $WorldEnvironment.get_environment()
 
 const save_file_name = "user://user_data.save"
 var default_user_data = {
@@ -66,7 +66,7 @@ func hide_all_menus():
 		if menu.is_in_group("Menus"):
 			menu.hide()
 
-	blur_shader.hide()
+	disableBackgroundBlur()
 	unpause()
 
 
@@ -76,8 +76,7 @@ func open_menu(menu_name):
 			if (menu.get_name() == menu_name):
 				menu.show()
 				pause()
-				if field != null and field.is_playing:
-					blur_shader.show()
+				enableBackgroundBlur()
 				
 				# Focus on first button
 				var child = menu
@@ -154,7 +153,16 @@ func unmount_level():
 	if field != null:
 		field.end_game()
 		field.queue_free()
-		blur_shader.hide()
+
+
+func enableBackgroundBlur():
+	worldEnvironment.tonemap_exposure = 0.5
+	worldEnvironment.dof_blur_near_enabled = true
+
+
+func disableBackgroundBlur():
+	worldEnvironment.tonemap_exposure = 1
+	worldEnvironment.dof_blur_near_enabled = false
 
 
 func _on_UI_quitted():
