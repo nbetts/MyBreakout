@@ -6,13 +6,20 @@ export var max_speed = 900
 export var friction = 120
 
 var velocity = Vector2.ZERO
+var mouseDelta = 0
 
 func _physics_process(_delta):
 	move_using_mouse()
+
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		mouseDelta = event.relative.x
 	
 
 func move_using_mouse():
-	move_and_collide(Vector2((get_viewport().get_mouse_position().x-position.x), 0))
+	move_and_collide(Vector2(mouseDelta, 0))
+	mouseDelta = 0
 
 
 func move_using_keyboard():
