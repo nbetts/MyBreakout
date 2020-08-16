@@ -1,7 +1,8 @@
 class_name Brick
 extends StaticBody2D
 
-signal damageTaken(damage)
+signal damaged(damage)
+signal died
 
 export var health = 5
 
@@ -24,12 +25,13 @@ func update_color():
 		_: polygon.color = '#000000'
 
 
-func take_hit(damage):
+func damaged(damage):
 	var damageTaken = min(damage, health)
 	health -= damageTaken
-	emit_signal("damageTaken", damageTaken)
+	emit_signal("damaged", damageTaken)
 
 	if health > 0:
 		update_color()
 	else:
+		emit_signal("died")
 		queue_free()

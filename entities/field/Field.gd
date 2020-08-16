@@ -44,7 +44,9 @@ func begin_game(level):
 		remove_child(current_level)
 
 	current_level = current_level_scene.instance() as Level
-	current_level.connect("damageTaken", self, "add_to_score")
+	current_level.connect("brick_damaged", self, "brick_damaged")
+	current_level.connect("brick_died", self, "brick_died")
+	current_level.connect("all_bricks_died", self, "all_bricks_died")
 	add_child(current_level)
 	
 	# Reset paddle position
@@ -73,11 +75,22 @@ func update_lives(lives):
 		livesIndicator.hide()
 
 
+func brick_damaged(damage):
+	# increase player score by the damage done to the brick
+	add_to_score(damage)
+
+
+func brick_died():
+	# add small bonus to score when a brick has died
+	add_to_score(3)
+
+
+func all_bricks_died():
+	emit_signal("game_won")
+
+
 func add_to_score(points):
 	update_score(player_score + points)
-	
-	if player_score >= current_level.max_level_score:
-		emit_signal("game_won")
 
 
 func update_score(score):

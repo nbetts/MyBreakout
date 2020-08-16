@@ -49,7 +49,7 @@ func _physics_process(delta):
 					x+= (position.x - collision.collider.position.x) * 12
 					
 				elif collision.collider.is_in_group("brick"):
-					collision.collider.take_hit(damage)
+					collision.collider.damaged(damage)
 				
 				# clamp the sideways velocity so that the ball doesn't take ages to travel
 				x = clamp(x, -400, 400)

@@ -1,15 +1,29 @@
 class_name Level
 extends Node2D
 
-signal damageTaken(damage)
+signal brick_damaged(damage)
+signal brick_died
+signal all_bricks_died
 
-export var max_level_score = 0
+var brick_count = 0
+var bricks_remaining = 0
 
 func _ready():
 	for child in get_children():
-		child.connect("damageTaken", self, "emit_damage")
-		max_level_score += child.health
+		child.connect("damaged", self, "brick_damaged")
+		child.connect("died", self, "brick_died")
+		brick_count += 1
+	
+	bricks_remaining = brick_count
 
 
-func emit_damage(damage):
-	emit_signal("damageTaken", damage)
+func brick_damaged(damage):
+	emit_signal("brick_damaged", damage)
+
+
+func brick_died():
+	bricks_remaining -= 1
+	emit_signal("brick_died")
+	
+	if bricks_remaining <= 0:
+		emit_signal("all_bricks_died")
