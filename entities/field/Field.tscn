@@ -1,10 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://entities/paddle/Paddle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/field/Field.gd" type="Script" id=2]
 [ext_resource path="res://ui/ball.png" type="Texture" id=3]
+[ext_resource path="res://ui/field_hud_font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://ui/theme.tres" type="Theme" id=5]
-[ext_resource path="res://ui/windows_command_prompt.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 512, 7.99994 )
@@ -18,16 +18,11 @@ extents = Vector2( 8, 400 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 512, 8 )
 
-[sub_resource type="DynamicFont" id=5]
-size = 24
-font_data = ExtResource( 6 )
-
-[sub_resource type="DynamicFont" id=6]
-size = 24
-font_data = ExtResource( 6 )
-
 [node name="Field" type="Node2D"]
 script = ExtResource( 2 )
+
+[node name="LevelTimer" type="Timer" parent="."]
+process_mode = 0
 
 [node name="Floor" type="Area2D" parent="."]
 collision_mask = 6
@@ -62,44 +57,85 @@ pause_mode = 2
 layer = 10
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 theme = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LivesLabel" type="Label" parent="CanvasLayer/HUD"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 72.0
-margin_bottom = 38.0
-custom_fonts/font = SubResource( 5 )
-text = "Lives"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="LivesIndicator" type="TextureRect" parent="CanvasLayer/HUD"]
-margin_left = 88.0
-margin_top = 20.0
-margin_right = 128.0
-margin_bottom = 52.0
-rect_scale = Vector2( 0.4, 0.4 )
+margin_left = 97.0
+margin_top = 22.0
+margin_right = 137.0
+margin_bottom = 54.0
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 0
 texture = ExtResource( 3 )
 stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScoreLabel" type="Label" parent="CanvasLayer/HUD"]
-margin_left = 16.0
-margin_top = 48.0
-margin_right = 67.0
-margin_bottom = 62.0
-custom_fonts/font = SubResource( 6 )
-text = "Score   0"
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/HUD"]
+anchor_right = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = 84.0
+custom_constants/vseparation = 10
+custom_constants/hseparation = 20
+columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="LivesLabel" type="Label" parent="CanvasLayer/HUD/GridContainer"]
+margin_right = 57.0
+margin_bottom = 22.0
+custom_fonts/font = ExtResource( 4 )
+text = "Lives"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LivesIndicator" type="Label" parent="CanvasLayer/HUD/GridContainer"]
+margin_left = 77.0
+margin_right = 121.0
+margin_bottom = 22.0
+custom_fonts/font = ExtResource( 4 )
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/HUD/GridContainer"]
+margin_top = 32.0
+margin_right = 57.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 4 )
+text = "Score"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreIndicator" type="Label" parent="CanvasLayer/HUD/GridContainer"]
+margin_left = 77.0
+margin_top = 32.0
+margin_right = 121.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 4 )
+text = "0"
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer/HUD/GridContainer"]
+margin_top = 64.0
+margin_right = 57.0
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 4 )
+text = "Time"
+
+[node name="TimeIndicator" type="Label" parent="CanvasLayer/HUD/GridContainer"]
+margin_left = 77.0
+margin_top = 64.0
+margin_right = 121.0
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 4 )
+text = "0:00"
+[connection signal="timeout" from="LevelTimer" to="." method="_on_LevelTimer_timeout"]
 [connection signal="body_entered" from="Floor" to="." method="_on_Floor_body_entered"]

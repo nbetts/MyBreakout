@@ -151,7 +151,7 @@ func game_over():
 
 func unmount_level():
 	if field != null:
-		field.end_game()
+		field.unmount_level()
 		field.queue_free()
 
 
