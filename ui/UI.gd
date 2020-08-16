@@ -8,6 +8,10 @@ signal level_selected(level)
 signal level_restarted
 signal user_data_cleared
 
+func open_pause_menu():
+	emit_signal("menu_opened", "PauseMenu")
+
+
 # Main menu
 func _on_Play_pressed():
 	emit_signal("level_select_menu_opened")
@@ -40,10 +44,6 @@ func _on_OptionsBack_pressed():
 
 
 # Pause menu
-func openPauseMenu():
-	emit_signal("menu_opened", "PauseMenu")
-
-
 func _on_Continue_pressed():
 	emit_signal("all_menus_hidden")
 

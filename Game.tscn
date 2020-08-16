@@ -20,6 +20,9 @@ glow_bicubic_upscale = true
 [node name="Game" type="Node"]
 script = ExtResource( 2 )
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 pause_mode = 2
 layer = 10
@@ -28,9 +31,6 @@ layer = 10
 margin_top = 0.474274
 margin_bottom = 0.474243
 rect_rotation = 0.13786
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 2 )
 [connection signal="all_menus_hidden" from="CanvasLayer/UI" to="." method="_on_UI_all_menus_hidden"]
 [connection signal="level_restarted" from="CanvasLayer/UI" to="." method="_on_UI_level_restarted"]
 [connection signal="level_select_menu_opened" from="CanvasLayer/UI" to="." method="_on_UI_level_select_menu_opened"]

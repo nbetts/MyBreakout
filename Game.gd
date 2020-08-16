@@ -22,7 +22,7 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
-		ui.openPauseMenu()
+		ui.open_pause_menu()
 
 
 func load_user_data():
@@ -62,33 +62,22 @@ func unpause():
 
 
 func hide_all_menus():
-	for menu in ui.get_children():
-		if menu.is_in_group("Menus"):
-			menu.hide()
+	for menu in get_tree().get_nodes_in_group("Menu"):
+		menu.hide()
 
 	disableBackgroundBlur()
 	unpause()
 
 
 func open_menu(menu_name):
-	for menu in ui.get_children():
-		if menu.is_in_group("Menus"):
-			if (menu.get_name() == menu_name):
-				menu.show()
-				pause()
-				enableBackgroundBlur()
-				
-				# Focus on first button
-				var child = menu
-				var child_count = menu.get_child_count()
-				while child_count > 0 and not (child is Button or child is MyButton):
-					child = child.get_child(0)
-					child_count = child.get_child_count()
-				
-				if (child is Button or child is MyButton):
-					child.grab_focus()
-			else:
-				menu.hide()
+	for menu in get_tree().get_nodes_in_group("Menu"):
+		if (menu.get_name() == menu_name):
+			pause()
+			enableBackgroundBlur()
+			menu.show()
+			menu.set_default_button_focus()
+		else:
+			menu.hide()
 
 
 func open_level_select_menu():

@@ -3,7 +3,9 @@
 [ext_resource path="res://ui/MyButton.gd" type="Script" id=1]
 [ext_resource path="res://assets/bounce.wav" type="AudioStream" id=2]
 
-[node name="MyButton" type="Button"]
+[node name="MyButton" type="Button" groups=[
+"Button",
+]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )

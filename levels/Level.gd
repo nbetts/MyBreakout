@@ -6,7 +6,7 @@ signal brick_died
 signal all_bricks_died
 signal timed_out
 
-export var level_time_in_seconds = 60
+export var level_time_in_seconds = 120
 
 var brick_count = 0
 var bricks_remaining = 0
